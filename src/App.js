@@ -1,22 +1,38 @@
-import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import './App.css';
-import SearchBar from './SearchBar';
+import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import "./App.css";
+import SearchBar from "./SearchBar";
+import ProfileCards from "./ProfileCards";
 
 export default function MyApp() {
   let [users, setUsers] = useState([]);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch("https://jsonplaceholder.typicode.com/users");
+  //       const data = await response.json();
+  //       setUsers(data);
+  //     } catch (error) {
+  //       console.error("Error fetching profiles:", error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+  // console.log(users)
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://jsonplaceholder.typicode.com/users");
+        const response = await fetch("https://randomuser.me/api/?results=20");
         const data = await response.json();
-        setUsers(data);
+        setUsers(data.results);
+        console.log(data.results);
       } catch (error) {
         console.error("Error fetching profiles:", error);
       }
     };
-
     fetchData();
   }, []);
 
@@ -29,13 +45,22 @@ export default function MyApp() {
             <Link to="/">MyApp</Link>
           </div>
           <div className="nav-links">
-            <Link to="/" className="nav-button">Home</Link>
+            <Link to="/" className="nav-button">
+              Home
+            </Link>
           </div>
         </nav>
 
         {/* Routing */}
         <Routes>
-          <Route path="/" element={<SearchBar user={users} />} />
+          <Route exact path="/"
+            element={
+              <>
+                <SearchBar user={users} />
+                <ProfileCards users={users} />
+              </>
+            }
+          />
         </Routes>
       </div>
     </Router>

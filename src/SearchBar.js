@@ -10,7 +10,8 @@ export default function SearchBar({user}) {
   useEffect(()=>{
     if(input){
         let result = values.filter((val)=>{
-          return (val.name).toLocaleLowerCase().startsWith(input)
+          console.log(val.name.first)
+          return (val.name.first).toLocaleLowerCase().startsWith(input)
         });
         setRes(result);
     }
@@ -32,7 +33,7 @@ export default function SearchBar({user}) {
         <input value= {input} onChange={handleChange}/>
         <ul>
         {res.map((val,key)=>(
-            <li key={key} value={val} onClick={handleValue}>{val.name}</li>
+            <li key={key} value={val} onClick={handleValue}>{val.name.first}</li>
         ))}
         </ul>
     </div>
