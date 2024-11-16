@@ -1,7 +1,7 @@
 /* Styles for the container */
 div {
   width: 300px;
-  margin: 20px auto;
+  margin: 2px auto;
   font-family: Arial, sans-serif;
   position: relative;
 }

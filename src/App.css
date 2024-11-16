@@ -1,17 +1,75 @@
-.btn {
-  color: blue;
-  border-radius: 5px;
-  width: 70px;
-  height: 30px;
-  background-color: yellow;
+/* General reset */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
-.inp {
-  margin: 10px;
-  height: 20px;
-  border-radius: 10px;
+
+/* Full-width navbar */
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #0073b1; /* LinkedIn blue */
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
 }
+
+/* Logo styling */
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.logo a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Navigation links */
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  color: white;
+  background-color: #005582;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: #003d5a;
+}
+
+/* Add margin to content to avoid overlap with the fixed navbar */
 .container {
-  /* align-items: center; */
-  margin: 0 auto;
-  width: 20%;
+  margin-top: 60px; /* Adjust based on navbar height */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 10px;
+  }
 }

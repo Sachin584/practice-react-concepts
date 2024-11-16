@@ -1,20 +1,22 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
+import './SearchBar.css';
 
-export default function SearchBar() {
-  let values = ['sachin', 'chotu','ch','cha'];
+export default function SearchBar({user}) {
+  let values = user;
   let [input, setInput] = useState("");
   let [res, setRes] = useState([]);
 
   useEffect(()=>{
     if(input){
-        let result = values.filter((val)=>val.startsWith(input));
+        let result = values.filter((val)=>{
+          return (val.name).toLocaleLowerCase().startsWith(input)
+        });
         setRes(result);
     }
     return ()=>{
         setRes([])
     }
-    //console.log();
   },[input])
 
   let handleChange = (e)=>{
@@ -30,7 +32,7 @@ export default function SearchBar() {
         <input value= {input} onChange={handleChange}/>
         <ul>
         {res.map((val,key)=>(
-            <li key={key} value={val} onClick={handleValue}>{val}</li>
+            <li key={key} value={val} onClick={handleValue}>{val.name}</li>
         ))}
         </ul>
     </div>
