@@ -1,0 +1,56 @@
+/* Styles for the container */
+div {
+  width: 300px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+/* Input field styling */
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Styles for the dropdown list */
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 150px;
+  overflow-y: auto;
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  top: 40px;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* List items styling */
+li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+li:hover {
+  background-color: #f1f1f1;
+}
+
+/* Hide the dropdown when there are no results */
+ul:empty {
+  display: none;
+}
