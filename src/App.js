@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import SearchBar from "./SearchBar";
 import ProfileCards from "./ProfileCards";
+import { UserProvider } from "./UserContext";
 
 export default function MyApp() {
-  let [users, setUsers] = useState([]);
+  // let [users, setUsers] = useState([]);
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -22,21 +23,22 @@ export default function MyApp() {
   // }, []);
   // console.log(users)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("https://randomuser.me/api/?results=20");
-        const data = await response.json();
-        setUsers(data.results);
-        console.log(data.results);
-      } catch (error) {
-        console.error("Error fetching profiles:", error);
-      }
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch("https://randomuser.me/api/?results=20");
+  //       const data = await response.json();
+  //       setUsers(data.results);
+  //       console.log(data.results);
+  //     } catch (error) {
+  //       console.error("Error fetching profiles:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   return (
+    <UserProvider>
     <Router>
       <div className="container">
         {/* Navigation Links */}
@@ -56,13 +58,14 @@ export default function MyApp() {
           <Route exact path="/"
             element={
               <>
-                <SearchBar user={users} />
-                <ProfileCards users={users} />
+                <SearchBar  />
+                <ProfileCards  />
               </>
             }
           />
         </Routes>
       </div>
     </Router>
+    </UserProvider>
   );
 }

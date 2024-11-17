@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import './SearchBar.css';
-
-export default function SearchBar({user}) {
-  let values = user;
+import { useUsers } from './UserContext';
+ 
+export default function SearchBar() {
+  let {users} = useUsers();
   let [input, setInput] = useState("");
   let [res, setRes] = useState([]);
-
+  
   useEffect(()=>{
     if(input){
-        let result = values.filter((val)=>{
+        let result = users.filter((val)=>{
           console.log(val.name.first)
           return (val.name.first).toLocaleLowerCase().startsWith(input)
         });
@@ -21,11 +22,12 @@ export default function SearchBar({user}) {
   },[input])
 
   let handleChange = (e)=>{
-    setInput(e.target.value)
+    setInput(e.target.value);
+    console.log(users)
   }
 
   let handleValue = (e)=>{
-    console.log(e.target.textContent+"calling") 
+    
     setInput(e.target.textContent);
   }
   return (

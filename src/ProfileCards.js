@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./ProfileCards.css"; // Include your CSS styles here
+import { useUsers } from "./UserContext";
 
 import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 
-export default function ProfileCards({ users }) {
+export default function ProfileCards() {
+  let {users} = useUsers();
   const [people, setPeople] = useState([]);
 
   useEffect(() => {
