@@ -29,8 +29,8 @@ export default function SearchBar({user}) {
     setInput(e.target.textContent);
   }
   return (
-    <div>
-        <input value= {input} onChange={handleChange}/>
+    <div className='searchbar'>
+        <input  value= {input} onChange={handleChange}/>
         <ul>
         {res.map((val,key)=>(
             <li key={key} value={val} onClick={handleValue}>{val.name.first}</li>

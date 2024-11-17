@@ -1,5 +1,5 @@
 /* Styles for the container */
-div {
+.searchbar {
   width: 300px;
   margin: 2px auto;
   font-family: Arial, sans-serif;
