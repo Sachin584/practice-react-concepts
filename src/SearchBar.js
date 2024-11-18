@@ -1,43 +1,48 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react';
-import './SearchBar.css';
-import { useUsers } from './UserContext';
- 
+import React, { useState } from "react";
+import { useUsers } from "./UserContext";
+
 export default function SearchBar() {
-  let {users} = useUsers();
-  let [input, setInput] = useState("");
-  let [res, setRes] = useState([]);
-  
-  useEffect(()=>{
-    if(input){
-        let result = users.filter((val)=>{
-          console.log(val.name.first)
-          return (val.name.first).toLocaleLowerCase().startsWith(input)
-        });
-        setRes(result);
-    }
-    return ()=>{
-        setRes([])
-    }
-  },[input])
+  const { users, setFilteredUsers } = useUsers();
+  const [input, setInput] = useState("");
+  const [res, setRes] = useState([]); // Local state for suggestions
 
-  let handleChange = (e)=>{
-    setInput(e.target.value);
-    console.log(users)
-  }
+  const handleChange = (e) => {
+    const value = e.target.value.toLowerCase();
+    setInput(value);
 
-  let handleValue = (e)=>{
-    
-    setInput(e.target.textContent);
-  }
+    // Filter suggestions
+    const suggestions = users.filter((user) =>
+      user.name.first.toLowerCase().startsWith(value)
+    );
+    setRes(suggestions);
+
+    // Update filteredUsers for ProfileCards
+    setFilteredUsers(suggestions);
+  };
+
+  const handleValue = (name) => {
+    setInput(name);
+    const selectedUser = users.filter(
+      (user) => user.name.first.toLowerCase() === name.toLowerCase()
+    );
+    setRes([]);
+    setFilteredUsers(selectedUser); // Update the displayed users to match the selected suggestion
+  };
+
   return (
-    <div className='searchbar'>
-        <input  value= {input} onChange={handleChange}/>
-        <ul>
-        {res.map((val,key)=>(
-            <li key={key} value={val} onClick={handleValue}>{val.name.first}</li>
+    <div className="searchbar">
+      <input
+        value={input}
+        onChange={handleChange}
+        placeholder="Search for a user..."
+      />
+      <ul>
+        {res.map((user, index) => (
+          <li key={index} onClick={() => handleValue(user.name.first)}>
+            {user.name.first}
+          </li>
         ))}
-        </ul>
+      </ul>
     </div>
-  )
+  );
 }
