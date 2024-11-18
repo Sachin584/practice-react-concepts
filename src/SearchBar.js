@@ -18,6 +18,11 @@ export default function SearchBar() {
 
     // Update filteredUsers for ProfileCards
     setFilteredUsers(suggestions);
+
+    //clear the suggestions in case of empty value 
+    if(value === ''){
+      setRes([]);
+    }
   };
 
   const handleValue = (name) => {
