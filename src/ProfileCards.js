@@ -1,11 +1,17 @@
 import React from "react";
 import { useUsers } from "./UserContext";
 import { Card, CardContent, CardMedia, Typography, Box } from "@mui/material";
+import CardModel from "./CardModel";
+import { useState } from "react";
 
 export default function ProfileCards() {
   const { filteredUsers } = useUsers();
+  const [selectedCard,setSelectedCard] = useState(null);
+  const handleClose = () => setSelectedCard(null);
+
 
   return (
+    <>
     <Box
       sx={{
         display: "flex",
@@ -22,13 +28,16 @@ export default function ProfileCards() {
             width: "23%",
             marginBottom: 2,
             boxShadow: 3,
-          }}
+          }} 
+          onClick = {()=>  setSelectedCard(user)
+          }
         >
           <CardMedia
             component="img"
             height="200"
             image={user.picture.large}
             alt={user.name.first}
+            
           />
           <CardContent>
             <Typography variant="h6" gutterBottom>
@@ -41,5 +50,8 @@ export default function ProfileCards() {
         </Card>
       ))}
     </Box>
+
+    {selectedCard && <CardModel user={selectedCard} isOpen={!!selectedCard} onClose={handleClose}/>}
+    </>
   );
 }
